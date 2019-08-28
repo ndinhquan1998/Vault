@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tic tac toe </title>
+    <link href="//db.onlinewebfonts.com/c/0dd7edde115ef38e7def4b16e93b5884?family=HarmoniaSansW01-Regular" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="g.css">
+     
+     
+
+</head>
+
+<body>
+   
+    <div class="">
+        <div class="jumbotron">
+            <h1 style="text-align: center" class="display-4 heading"> TIC TAC TOE</h1>
+
+
+
+            <div class="stripe">
+                <h3 class="p1 d-inline col-xs-5">Player 1 (X) : <span class="p1_score">0</span></h3>
+                <h3 class="p2 d-inline col-xs-1">Player 2 (O) : <span class="p2_score">0</span></h3>
+
+                <div class="btn-group btn-group-lg">
+                <a class="d-inline btn btn-outline-dark btn-lg reset">RESET</a>
+                    <a onclick="hide('ctn')" id="ctn" class="btn btn-outline-dark btn-lg replay">REPLAY</a> </div>
+                    <!--UNDO-->
+
+            </div>
+
+        </div>
+    </div>
+    
+        <!--Timer debug-->
+    <div style="text-align: center " class="container">
+<!--        <a href="#" class="btn btn-outline-dark btn-lg" onClick="stopwatch.start();">Start</a>
+        <a href="#" class="btn btn-outline-dark btn-lg" onClick="stopwatch.lap();">Lap</a>
+        <a href="#" class="btn btn-outline-dark btn-lg" onClick="stopwatch.stop();">Stop</a>
+        <a href="#" class="btn btn-outline-dark btn-lg" onClick="stopwatch.restart();">Restart</a>
+        <a href="#" class="btn btn-outline-dark btn-lg" onClick="stopwatch.clear();">Clear Laps</a>
+        <a class="results"></a>
+        -->
+        
+        <h3>Match Timer</h3>
+        <div class="stopwatch2"></div>
+        
+    </div>
+    
+    <div style="box-sizing: border-box;" class="">
+
+      <div class="row">
+          <div style="background-color:#7b8d9d;" 
+          class=" float-left col-lg  "> 
+                    <h3>Match End At:</h3>
+                     <ol style="font-size: 30px" id="matchEndAt"></ol>
+                      <a class=" d-flex justify-content-center align-self-center btn btn-outline-dark btn-lg undo_Btn">UNDO</a>
+                      <!--<a class=" d-flex justify-content-center align-self-center btn btn-outline-dark btn-lg test_Btn">Test</a> 
+                      <a class=" d-flex justify-content-center align-self-center btn btn-outline-dark btn-lg test2_Btn">Test2</a> </div>
+          <div style=" flex: none" class="float-left  col-lg-5 ">-->
+     <table id="tb">
+        <tr class="row1">
+            <td id="cell_0_0" class="cell row01 column1 diagonal1 " onClick="JavaScript: clickCell(0,0);" >&nbsp;</td>
+            <td id="cell_0_1" class="cell row01 column2"            onClick="JavaScript: clickCell(0,1);" >&nbsp;</td>
+            <td id="cell_0_2" class="cell row01 column3 diagonal2"  onClick="JavaScript: clickCell(0,2);" >&nbsp;</td>
+        </tr>
+        <tr class="row2">
+            <td id="cell_1_0" class="cell row02 column1"            onClick="JavaScript: clickCell(1,0);" >&nbsp;</td>
+            <td id="cell_1_1" class="cell row02 column2 
+                                         diagonal1 diagonal2"       onClick="JavaScript: clickCell(1,1);" >&nbsp;</td>
+            <td id="cell_1_2" class="cell row02 column3"            onClick="JavaScript: clickCell(1,2);" >&nbsp;</td>
+        </tr>
+        <tr class="row3">
+            <td id="cell_2_0" class="cell row03 column1 diagonal2"  onClick="JavaScript: clickCell(2,0);" >&nbsp;</td>
+            <td id="cell_2_1" class="cell row03 column2"            onClick="JavaScript: clickCell(2,1);" >&nbsp;</td>
+            <td id="cell_2_2" class="cell row03 column3 diagonal1"  onClick="JavaScript: clickCell(2,2);" >&nbsp;</td>
+        </tr></table>
+         
+          </div>
+          <div style="background-color: #7b8d9d;" class="float-left col-lg overflow-auto "> 
+          <h3 style="text-align: center"> Game Statistics</h3>
+          <h3 style="text-align: center"> Player Time <p id="pTimer" class="stopwatch"></p></h3>
+             <ol id="statisticList"></ol>
+            </div>
+    
+
+        </div>
+        </div>
+
+
+
+    <!--POP UP STATUS GAME-->
+    <div class="popup" id="popup2">
+        <div class="popup-content">
+            <div class="popup-header">
+                <br>
+            </div>
+            <div class="popup-body">
+                <br>
+                <p>Draw</p>
+                <p><a href="#" onclick="hide('popup2'), resetHelper();restartMatchTimer(); ">Continue!</a></p>
+                <p><a href="#" onclick="hide('popup2');show('ctn')">Review Match</a></p>
+
+            </div>
+            <div class="popup-footer">
+                <br>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="popup" id="popup1">
+        <div class="popup-content">
+            <div class="popup-header">
+                <br>
+            </div>
+            <div class="popup-body">
+                <br>
+                <p>Player 1 Won</p>
+                <p><a href="#" onclick="hide('popup1') ;resetHelper();restartMatchTimer(); ">Continue!</a></p>
+                <p><a href="#" onclick="hide('popup1');show('ctn')">Review Match</a></p>
+            </div>
+            <div class="popup-footer">
+                <br>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="popup" id="popup3">
+        <div class="popup-content">
+            <div class="popup-header">
+                <br>
+            </div>
+            <div class="popup-body">
+                <br>
+                <p>Player 2 Won</p>
+                <p><a href="#" onclick="hide('popup3'); resetHelper();restartMatchTimer();">Continue!</a></p>
+                <p><a href="#" onclick="hide('popup3');show('ctn')">Review Match</a></p>
+            </div>
+            <div class="popup-footer">
+                <br>
+            </div>
+
+        </div>
+    </div>
+         <div style="padding-top: 550px" class="popup" id="popup4">
+        <div class="popup-content">
+            <div style="padding: 30px">
+              <p><a href="#" onclick="hide('popup4');startGameTimer()">Start!</a></p>
+            </div>
+        </div>
+    </div>
+<!--                <div id="clock" style="align-content: center ;padding-bottom:0 " class="stripe">                 
+                    <p class="date">{{ date }}</p>
+                    <p class="time">{{ time }}</p>
+                    </div>-->
+    <!--***************************SCRIPT*****************************-->
+    <p id="check"></p>
+    <p id="check1"></p>
+<!--    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vuex"></script>-->
+<!--    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>-->
+    
+ 
+    <script type="text/javascript" src="jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="game.js"></script>
+    <script type="text/javascript" src="timer.js"></script>
+
+</body></html>

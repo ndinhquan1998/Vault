@@ -1,0 +1,241 @@
+@import url(//db.onlinewebfonts.com/c/0dd7edde115ef38e7def4b16e93b5884?family=HarmoniaSansW01-Regular);
+@font-face {font-family: "HarmoniaSansW01-Regular";
+    src: url("//db.onlinewebfonts.com/t/0dd7edde115ef38e7def4b16e93b5884.eot");
+    src: url("//db.onlinewebfonts.com/t/0dd7edde115ef38e7def4b16e93b5884.eot?#iefix") format("embedded-opentype"),
+    url("//db.onlinewebfonts.com/t/0dd7edde115ef38e7def4b16e93b5884.woff2") format("woff2"),
+    url("//db.onlinewebfonts.com/t/0dd7edde115ef38e7def4b16e93b5884.woff") format("woff"),
+    url("//db.onlinewebfonts.com/t/0dd7edde115ef38e7def4b16e93b5884.ttf") format("truetype"),
+    url("//db.onlinewebfonts.com/t/0dd7edde115ef38e7def4b16e93b5884.svg#HarmoniaSansW01-Regular") format("svg");
+}
+ 
+body {
+  font-family: HarmoniaSansW01-Regular;
+  font-size: 13px;
+  font-weight: 400;
+  color: #4f5d6e;
+  position: relative;
+ /* background-color: rgb(26, 49, 95);*/
+ 
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#1a315f', endColorstr='#1a315f', GradientType=0);
+    margin:0px ;
+}
+.center{
+    margin: 0 auto;
+    
+}
+td{
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    font-size: 70px;
+    font-family: HarmoniaSansW01-Regular;
+    /*font-weight: bold;*/
+    color: #44515c;
+    
+}
+.td:hover{
+background-color: yellow;
+-webkit-box-shadow: 0px 0px 25px 10px #ffa;
+box-shadow: 0px 0px 25px 10px #ffa;
+}
+.hover{
+	-webkit-box-shadow: inset 0px 0px 5px 5px rgba(50, 150, 25, .5);
+	box-shadow: inset 0px 0px 5px 5px rgba(50, 150, 25, .5);
+}
+h1{
+    
+    text-align: center;
+    font-weight: lighter;
+    font-family: HarmoniaSansW01-Regular;
+    text-transform: uppercase;
+}
+.content{
+    margin: 20px auto;
+    max-width: 400px;
+    
+}
+.row1 td , .row2 td{
+    border-bottom: 4px solid #4c5a66;
+    
+}
+.column1 , .column2 {
+    border-right: 4px solid #4c5a66;
+    
+}
+table{
+    margin: 60px auto;
+}
+.p2{
+    float: right;
+    font-weight: normal;
+
+}
+.p1{
+    float: left;
+    font-weight: normal;
+}
+.draw{ 
+    font-weight: normal;
+}
+.stripe{
+    align-content: center;
+    text-align:center;
+    
+     
+    text-transform: uppercase;
+    background: #7b8d9d;
+     
+    padding:40px;
+    
+    
+}
+.p_X{
+    font-weight: normal;
+    
+}
+.p_O{
+   font-weight: normal;
+    float: right;
+    
+}
+.scores{
+    text-align: center;
+    background: #c8d0d6;
+    height: 80px;
+    padding-top: 30px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    
+}
+.win{
+    color: maroon;
+    
+}
+/* .reset{
+margin-left:100px;
+*/
+.font-size{
+    font-size: 40px;
+    color: #000;
+    
+}
+
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+.popup:after {
+  position: fixed;
+  content: "";
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: -2;
+}
+
+.popup:before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  
+  z-index: -1;
+}
+.popup {
+    font-size: 25px;
+    align-content: center;
+    text-align:center;
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.1); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.popup-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+.popup-header {
+  padding: 2px 16px;
+  background-color: maroon;
+  color: white;
+}
+
+.popup-body {padding: 2px 16px;}
+
+.popup-footer {
+  padding: 2px 16px;
+  background-color: maroon;
+  color: white;
+}
+
+
+
+
+.stopwatch {
+  font-size: 40px;
+
+  text-align: center;
+}
+.stopwatch2 {
+    font-size: 40px;
+    text-align: center;
+}
+.results {
+  border-color: lime;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+#clock {
+    font-family: 'Share Tech Mono', monospace;
+    color: black;
+    color: #daf6ff;
+    text-shadow: 0 0 20px rgba(10, 175, 230, 1),  0 0 20px rgba(10, 175, 230, 0);
+
+}
+    .time {
+        letter-spacing: 0.05em;
+        font-size: 50px;
+        padding: 5px 0;
+    }
+    .date {
+        letter-spacing: 0.1em;
+        font-size: 20px;
+    }
+#ctn {
+    display: none;
+}
