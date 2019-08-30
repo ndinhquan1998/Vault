@@ -239,3 +239,6 @@ margin-left:100px;
 #ctn {
     display: none;
 }
+#statisticList{
+        overflow: auto!important;
+}

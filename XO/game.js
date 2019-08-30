@@ -11,7 +11,7 @@ var tb          = Array.from(document.getElementById('tb'));
 
 var p1_score     = document.querySelector(".p1_score");
 var p2_score     = document.querySelector(".p2_score");
-var replay       = document.querySelector(".replay");
+var ctn       = document.querySelector("#ctn");
 var reset        = document.querySelector(".reset");
 var draw_matches = document.querySelector(".draw_matches");
 var undo         = document.querySelector(".undo_Btn");
@@ -24,12 +24,11 @@ var yourMoveY   =[];
 let state       = {grid: [[],[],[]]};
 var gridPreview =[[],[],[]];
 var newState =[];
-var turn = 1;
-var index = 0;
-var r = 2;
-var c = 2;
+var turn = 1; // Turn =0 match ended , Turn =1/2 player's turns
+var r; //board size
+var c;
 /*Debug Jquery*/
-$(document).ready(function(){
+/*$(document).ready(function(){
              if (jQuery) {  
                // jQuery is loaded  
                console.log("Yeah, jquery is working !");
@@ -37,32 +36,19 @@ $(document).ready(function(){
                // jQuery is not loaded
                alert("Doesn't Work");
              }
-          });
+          });*/
 
-/*Initialize Board Array */
-/*var grid= [
-    [],
-    [],
-    []];*/
-
-   
-
-// Initialize the grid
+// Initialize the grid's array
+function initialize(){
+    r = 2;
+    c = 2;
 for (var i=0; i<=r; i++) { for (var j=0; j<=c; j++) { state.grid[i][j] =0; } }
 
 for (var i=0; i<=r; i++) { for (var j=0; j<=c; j++) { gridPreview[i][j]=0; } }
  
 
-
-
-/*
-function saveState(){
-    
 }
-test2.addEventListener("click", function(){
-    saveState();
-});
-*/
+initialize();
 
 
 
@@ -82,8 +68,9 @@ var disableClick = function(id){
 var enableClick = function(id){
     $(id).prop("disabled",false);
 }
-disableClick('statisticList')
+
 show('popup4');
+
 /*RESET LOGIC*/
 
 function previewGame(id){
@@ -91,10 +78,11 @@ function previewGame(id){
  /*gridPreview= [
     [1,0,1],
     [0,1,0],
-    [0,1,0]];*/
- gridPreview = newState[id].slice();
-    console.log(gridPreview)
-    state.grid=gridPreview.slice();
+    [0,1,0]];
+    console.log(gridPreview)*/
+    gridPreview = newState[id].slice(); //picking state to middle array 
+    
+    state.grid=gridPreview.slice(); //loading state back working array
     for (var x=0; x<=r; x++) {
         for (var y=0; y<=c; y++) {
                 if (state.grid[x][y]==1) {
@@ -134,11 +122,11 @@ function resetHelper() {
     newState=[];
     show('pTimer');
 }
-/*replay.addEventListener("click", function () {
+ctn.addEventListener("click", function () {
     resetHelper();
-    stopwatch.restart();
-    console.log(grid);
-})*/
+    restartMatchTimer()
+    
+})
 reset.addEventListener("click", function () {
     resetHelper();
     p1_score.textContent = 0;
@@ -163,9 +151,8 @@ function undoFunction(){
     x.className ='li_statistic';
     if(isNaN(yourMoveX[yourMoveX.length-1]) && isNaN(yourMoveY[yourMoveY.length-1])){
     var t = alert("game not started");
-     
 } else {
-        var t = document.createTextNode("Player"+turn+" undo move X"+parseInt(yourMoveX[yourMoveX.length-1])+"Y"+parseInt(yourMoveY[yourMoveY.length-1]));
+        var t = document.createTextNode("Player"+ turn +" undo move X"+parseInt(yourMoveX[yourMoveX.length-1])+"Y"+parseInt(yourMoveY[yourMoveY.length-1]));
         x.appendChild(t);
 }
     document.getElementById("statisticList").appendChild(x);
@@ -204,13 +191,13 @@ undo.addEventListener("click" ,function(){
  
 /*Movement + Timer List */
 function gameStatistic() {
-  //if(   state.grid[yourMoveX][yourMoveY] ==0   ){
+
   var i = newState.length;
   var x = document.createElement("LI");
   x.className ='li_statistic';
     
   var t = document.createElement('button');
-  t.textContent =((i)+" Player"+turn+" moved to cell X"+parseInt(yourMoveX[yourMoveX.length-1])+"Y"+parseInt(yourMoveY[yourMoveY.length-1]));
+  t.textContent =(i+" Player"+turn+" moved to cell X"+parseInt(yourMoveX[yourMoveX.length-1])+"Y"+parseInt(yourMoveY[yourMoveY.length-1]));
   x.appendChild(t);
   x.addEventListener("click",function(){
       previewGame(i-1);
@@ -229,8 +216,8 @@ function clearList() {
     ol_list.removeChild(ol_list.firstChild);
   }
 }
-function clearMatchTimer(){
-     
+
+function clearMatchTimer(){     
     var mTimer = document.getElementById("matchEndAt");
     while (mTimer.hasChildNodes()) {
     mTimer.removeChild(mTimer.lastChild);}
@@ -253,6 +240,7 @@ function endThinkTimer (){
 }
 function restartMatchTimer (){
     stopwatch.reset();
+    stopwatch.start();
     stopwatch2.start();
 
 }
@@ -273,7 +261,7 @@ function textExtractor(arr) {
 function history1() {
     let obj = JSON.parse(JSON.stringify(state.grid)); // copy of object
     newState.push(obj);
-    console.log(newState);
+    //console.log(newState);
 }
 
 function allSame(arr, x) {
@@ -350,16 +338,15 @@ function comboFunction2(){
 }
  
 function clickCell(x,y) { 
-     
-    
     if (turn === 1) {
         if (state.grid[x][y]==0) {
             document.getElementById("cell_"+x+"_"+y).textContent="X";
             state.grid[x][y]=1;
             yourMoveX.push(x);
             yourMoveY.push(y);
-            turn = 2;
+            
             comboFunction()
+            turn = 2;
             
         }
         winArray = checkWin("X");
@@ -367,17 +354,19 @@ function clickCell(x,y) {
                 winningTheme(winArray);
                 p1_score.textContent = Number(p1_score.textContent) + 1;
                 p1_score.classList.add("font-size");
-                turn=0;
+                
                 comboFunction2();
+                turn=0;
                 show('popup1');
 
                  
         } 
         if (allFilled(tds) && (!winArray)) {
             stopwatch2.lap2();
-               
+            turn=0;
+            hide('pTimer');   
             show('popup2');
-            console.log(state.grid);
+            //console.log(state.grid);
              endMatchTimer(); 
             }
     }
@@ -387,8 +376,9 @@ function clickCell(x,y) {
        state.grid[x][y]=2;
             yourMoveX.push(x);
             yourMoveY.push(y);
-            comboFunction()
+            comboFunction();
             turn=1;
+            
  
              
         }
@@ -397,17 +387,12 @@ function clickCell(x,y) {
                 winningTheme(winArray);
                 p2_score.textContent = Number(p2_score.textContent) + 1;
                 p2_score.classList.add("font-size");
-                turn = 0;
                 comboFunction2();
-                show('popup3');
-
-            
+                turn = 0;
+                show('popup3');          
         }
   
      }
-    
-        
-    console.log(yourMoveX);
-    console.log(yourMoveY);
 }
+document.querySelectorAll(".li_statistic").disabled = true ; 
  
